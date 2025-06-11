@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Activity Dashboard</title>
+    <style>
+        /* Basic CSS for styling the dashboard */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            justify-content: center;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 45%; /* Adjust as needed */
+            box-sizing: border-box;
+        }
+        .card h2 {
+            color: #4CAF50;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95em;
+        }
+        ul li:last-child {
+            border-bottom: none;
+        }
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .activity-item .timestamp {
+            font-size: 0.8em;
+            color: #888;
+        }
+        .summary-stats p {
+            margin: 5px 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>User Activity Dashboard</h1>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h2>Recent Activities</h2>
+            <ul id="recent-activities-list">
+                </ul>
+        </div>
+
+        <div class="card">
+            <h2>Activity Summary</h2>
+            <div class="summary-stats">
+                <p><strong>Total Logins:</strong> <span id="total-logins">0</span></p>
+                <p><strong>Files Uploaded:</strong> <span id="files-uploaded">0</span></p>
+                <p><strong>Pages Viewed:</strong> <span id="pages-viewed">0</span></p>
+                <p><strong>Last Active:</strong> <span id="last-active">N/A</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 User Dashboard. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Dummy data for demonstration purposes
+        const activities = [
+            { description: "Logged in from IP: 192.168.1.100", timestamp: "2025-06-11 10:30 AM" },
+            { description: "Uploaded 'report.pdf'", timestamp: "2025-06-11 09:45 AM" },
+            { description: "Viewed 'Settings' page", timestamp: "2025-06-11 09:15 AM" },
+            { description: "Downloaded 'template.docx'", timestamp: "2025-06-10 04:00 PM" },
+            { description: "Logged out", timestamp: "2025-06-10 03:55 PM" },
+            { description: "Updated profile information", timestamp: "2025-06-10 02:30 PM" }
+        ];
+
+        const summaryData = {
+            totalLogins: 15,
+            filesUploaded: 7,
+            pagesViewed: 42,
+            lastActive: "2025-06-11 10:30 AM"
+        };
+
+        // Function to populate recent activities
+        function populateRecentActivities() {
+            const list = document.getElementById('recent-activities-list');
+            activities.forEach(activity => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('activity-item');
+                listItem.innerHTML = `
+                    <span>${activity.description}</span>
+                    <span class="timestamp">${activity.timestamp}</span>
+                `;
+                list.appendChild(listItem);
+            });
+        }
+
+        // Function to populate activity summary
+        function populateActivitySummary() {
+            document.getElementById('total-logins').textContent = summaryData.totalLogins;
+            document.getElementById('files-uploaded').textContent = summaryData.filesUploaded;
+            document.getElementById('pages-viewed').textContent = summaryData.pagesViewed;
+            document.getElementById('last-active').textContent = summaryData.lastActive;
+        }
+
+        // Call the functions to load data when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            populateRecentActivities();
+            populateActivitySummary();
+        });
+    </script>
+</body>
+</html>
